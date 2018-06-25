@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var dbConfig = require('./dbconfig');
 var logSql = require('./logsql');
 var util = require('./util');
-
+/*
 // 使用DBConfig.js的配置信息创建一个MySQL连接池
 // var pool = mysql.createPool( dbConfig.mysql );
 //创建一个connection
@@ -16,23 +16,22 @@ connection.connect(function(err){
     }
     console.log('[connection connect]  succeed!');
 });
-
+*/
 var server = net.createServer();  
-  
 //聚合所有客户端  
 var sockets = [];  
-  
 //接受新的客户端连接  
 server.on('connection', function(socket){  
     console.log('got a new connection');  
     sockets.push(socket);  
     //从连接中读取数据  
     socket.on('data', function(data){  
-        console.log('got data:', data.toString());  
+        console.log('got data:', data.toString('hex'));  
 
+        console.log('got data:', data);  
         let time = util.formatDate(new Date(), "yyyy-MM-dd hh:mm:ss.S");
         console.log(time);
-
+/*
         //存入数据库
         connection.query(logSql.insert,[data, new Date()],function (err,result) {
             if(err){
@@ -52,7 +51,7 @@ server.on('connection', function(socket){
             //     otherSocket.write(data.toString() + 'from server');  
             // }  
         });  
-  
+*/  
         //删除被关闭的连接  
         socket.on('close', function(){  
             console.log('connection closed');  
